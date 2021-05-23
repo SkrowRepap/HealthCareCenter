@@ -4,11 +4,14 @@ $conn = mysqli_connect('localhost', "root", '', 'hospital_record_management_syst
 $error = mysqli_error($conn);
 
     session_start();
+
+    //Fetching GET variables for later purposes...
     if (isset ($_GET['dname'])) {
         $doctorName = $_GET['dname'];
     } if (isset ($_GET['dID'])) {
       $doctorID = $_GET['dID'];
   }
+    //Fetching PATIENT ID
     $id = $_SESSION['patientID'];
     
 
@@ -82,7 +85,7 @@ body {
                </div>
           </div>
      </header>
-     
+     <!-- Displaying Data -->
     <!-- Data Table -->
     <div class="container d-flex flex-column position-relative" style="top:70px; margin-bottom: 70px;">
     <h1 class="display-5 text-center">PROFILE</h1>
@@ -100,8 +103,10 @@ body {
       </thead>
       <?php
 
-      // $sort = "SELECT consult. FROM patients, doctors,consult, tests WHERE consult.doctor_id=$dID AND doctors.doctor_id=$dID";
+    //  Query
       $sort = "SELECT records.*, patients.name AS 'pname', tests.test_name AS 'test', performed.result AS 'results', performed.result_ID AS 'resultsID', consult.date AS 'date' FROM consult, patients, tests, performed, records WHERE records.doctor_id = $doctorID AND patients.patient_ID=records.patient_ID AND tests.test_id=records.test_ID AND performed.result_ID = records.result_ID AND consult.consult_ID = records.consult_ID ORDER BY date DESC";
+      
+   //  Fetching
       $result = mysqli_query($conn, $sort);
       if (mysqli_num_rows($result) > 0) {
       while ($r = mysqli_fetch_assoc($result)) {
@@ -112,7 +117,7 @@ body {
           <td> ' . $r['pname'] . '       </td>
           <td> ' . $r['test'] . '      </td>
           <td> ' . $r['date'] . '      </td>';
-         
+        //  For updating
           if ($r['results'] == "Available") {
             echo '<td id="update"> <a class="text-success" href="?dname='.$doctorName.'&dID='.$doctorID.'&action_update=update&consultID=' . $r['record_ID'] . ' ">Available</a> </td>';
         } else if ($r['results'] == "Claimed") {
@@ -139,7 +144,8 @@ body {
      <script src="js/smoothscroll.js"></script>
      <script src="js/owl.carousel.min.js"></script>
      <script src="js/custom.js"></script>
-
+     
+<!-- Update Modal -->
      <div class="modal" tabindex="-1" role="dialog" id="updateModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

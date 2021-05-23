@@ -159,8 +159,9 @@ http://www.tooplate.com/view/2098-health
                          <div class="about-info">
                               <h2 class="wow fadeInUp" data-wow-delay="0.6s">Welcome to Your <i class="fa fa-h-square"></i>ealth Center</h2>
                               <div class="wow fadeInUp" data-wow-delay="0.8s">
-                                   <p>Aenean luctus lobortis tellus, vel ornare enim molestie condimentum. Curabitur lacinia nisi vitae velit volutpat venenatis.</p>
-                                   <p>Sed a dignissim lacus. Quisque fermentum est non orci commodo, a luctus urna mattis. Ut placerat, diam a tempus vehicula.</p>
+                                   <p>ALLIED CARE EXPERTS (ACE) MEDICAL – CEBU
+is a corporation initiated by a group of doctors and non-medical professionals with the mission of establishing a world class tertiary hospital in the south of Metro Cebu. ACEMC – Cebu is an eight (8) story building which will be known as the first medical center in Cebu owned, built and managed by the doctors themselves. ACEMC – Cebu is a member of the ACE Group of hospitals including in Metro Manila, Bulacan, Bohol, Ilo-Ilo, Tacloban and Dumaguete.</p>
+                                   <p>At ACE Medical Center – CEBU, our goal is to provide you with the highest quality health care service in a safe and comfortable place. We invest in the most advanced technology to deliver the finest health care in a caring environment to make your stay at ACE Medical Center – Cebu a very positive experience.</p>
                               </div>
                               <figure class="profile wow fadeInUp" data-wow-delay="1s">
                                    <img src="images/author-image.jpg" class="img-responsive" alt="">

@@ -1,8 +1,11 @@
 <?php
 session_start();
+
+// Assigning id
 $id = $_SESSION['patientID'];
-    $conn = mysqli_connect('localhost', "root", '', 'hospital_record_management_system');
-  $error = mysqli_error($conn);
+
+$conn = mysqli_connect('localhost', "root", '', 'hospital_record_management_system');
+$error = mysqli_error($conn);
 
 
   // Insert
@@ -14,21 +17,23 @@ if (
   $date = $_POST['date'];
   $doctorID = $_POST['department'];
 
+  //Inserting query to CONSULT table then fetch updated primary key
   $insertConsult_query = "INSERT INTO `consult`(`date`, `patient_ID`, `doctor_id`, `test_ID`) VALUES ('$date',$id,$doctorID,$testID)";
   mysqli_query($conn, $insertConsult_query);
 
+  // Fetching the most recent CONSULT ID and assigning it to a variable
   $rowSQL = mysqli_query($conn, "SELECT MAX(consult_ID) AS max FROM consult");
   $row = mysqli_fetch_array($rowSQL);
   $largestNumber = $row['max'];
   
+  // Inserting query to RECORDS table then display later on
   $insertRecords_query = "INSERT INTO `records`(`test_ID`, `doctor_id`, `patient_ID`, `result_ID`, `consult_ID`) VALUES ($testID,$doctorID,$id,3,$largestNumber)";
-  
-  
   mysqli_query($conn, $insertRecords_query);
   
   if ($error) {
     echo "Sorry something went wrong!";
   } 
+  //Reloads tab to update table
   header("Location: http://localhost/2098_health/profile.php");
   exit;
 }
@@ -101,7 +106,7 @@ body {
           </div>
      </header>
 
-
+<!-- Displaying the RECORD TABLE -->
      
 <!-- Data Table -->
  
@@ -121,8 +126,10 @@ body {
         </tr>
       </thead>
       <?php
+      // Query
       $sort = "SELECT patients.name AS 'pname', doctors.name AS 'dname', doctors.specialization AS 'dspecial', records.record_ID, consult.date AS 'date', tests.test_name AS 'test', performed.result AS 'results' FROM patients, doctors,consult, tests, performed, records WHERE patients.patient_ID=$id AND records.patient_ID=$id AND doctors.doctor_id=records.doctor_id AND tests.test_id=records.test_ID AND performed.result_ID = records.result_ID AND consult.consult_ID = records.consult_ID";
       $result = mysqli_query($conn, $sort);
+      // Fetching
       if (mysqli_num_rows($result) > 0) {
       while ($r = mysqli_fetch_assoc($result)) {
         echo '
